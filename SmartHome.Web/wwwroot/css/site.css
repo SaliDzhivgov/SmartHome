@@ -1,31 +1,388 @@
+:root {
+    --sh-bg: #f3f5f1;
+    --sh-surface: #ffffff;
+    --sh-ink: #14201b;
+    --sh-muted: #6b7a72;
+    --sh-nav: #10201a;
+    --sh-accent: #c6f432;
+    --sh-on: #18a058;
+    --sh-on-soft: #e3f6ea;
+    --sh-off: #9aa5a0;
+    --sh-off-soft: #eef1ef;
+    --sh-power: #e08a00;
+    --sh-radius: 18px;
+}
+
 html {
-  font-size: 14px;
+    font-size: 15px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+    html {
+        font-size: 16px;
+    }
 }
 
 body {
-  margin-bottom: 60px;
+    font-family: 'Onest', system-ui, sans-serif;
+    background-color: var(--sh-bg);
+    color: var(--sh-ink);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+main {
+    flex: 1;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+a {
+    color: var(--sh-on);
+}
+
+/* ---------- Меню ---------- */
+.sh-navbar {
+    background-color: var(--sh-nav);
+    padding-top: 0.9rem;
+    padding-bottom: 0.9rem;
+}
+
+.sh-brand {
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.sh-brand-icon {
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 10px;
+    background-color: var(--sh-accent);
+    color: var(--sh-nav);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sh-navbar .nav-link {
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+    border-radius: 999px;
+    padding: 0.45rem 0.9rem !important;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+    .sh-navbar .nav-link:hover,
+    .sh-navbar .nav-link.active {
+        color: #fff;
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+.sh-btn-accent {
+    background-color: var(--sh-accent);
+    color: var(--sh-nav);
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 0.5rem 1.1rem;
+    border: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+    .sh-btn-accent:hover {
+        background-color: var(--sh-accent);
+        color: var(--sh-nav);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 18px rgba(198, 244, 50, 0.35);
+    }
+
+/* ---------- Заглавия на страници ---------- */
+.sh-page-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+    .sh-page-header h1 {
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        margin: 0;
+    }
+
+.sh-eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--sh-muted);
+}
+
+/* ---------- Карти и панели ---------- */
+.sh-panel,
+.card {
+    border: none;
+    border-radius: var(--sh-radius);
+    background-color: var(--sh-surface);
+    box-shadow: 0 1px 2px rgba(16, 32, 26, 0.06);
+}
+
+.sh-panel {
+    padding: 1.5rem;
+}
+
+.sh-stat {
+    padding: 1.4rem 1.5rem;
+    border-radius: var(--sh-radius);
+    background-color: var(--sh-surface);
+    height: 100%;
+}
+
+.sh-stat-dark {
+    background-color: var(--sh-nav);
+    color: #fff;
+}
+
+.sh-stat-label {
+    font-size: 0.85rem;
+    color: var(--sh-muted);
+}
+
+.sh-stat-dark .sh-stat-label {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.sh-stat-value {
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+}
+
+.sh-stat-dark .sh-stat-value {
+    color: var(--sh-accent);
+}
+
+/* ---------- Карта на устройство ---------- */
+.sh-device-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .sh-device-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 28px rgba(16, 32, 26, 0.1);
+    }
+
+.sh-device-icon {
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+.is-on .sh-device-icon {
+    background-color: var(--sh-on-soft);
+    color: var(--sh-on);
+}
+
+.is-off .sh-device-icon {
+    background-color: var(--sh-off-soft);
+    color: var(--sh-off);
+}
+
+.sh-status-badge {
+    border-radius: 999px;
+    font-weight: 600;
+    padding: 0.4rem 0.7rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.is-on .sh-status-badge {
+    background-color: var(--sh-on-soft);
+    color: var(--sh-on);
+}
+
+.is-off .sh-status-badge {
+    background-color: var(--sh-off-soft);
+    color: var(--sh-muted);
+}
+
+.sh-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background-color: currentColor;
+}
+
+.is-on .sh-dot {
+    box-shadow: 0 0 0 3px rgba(24, 160, 88, 0.2);
+}
+
+.sh-power {
+    font-weight: 700;
+    color: var(--sh-power);
+}
+
+.sh-toggle-btn {
+    border-radius: 999px;
+    font-weight: 600;
+    border: 1px solid transparent;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.is-on .sh-toggle-btn {
+    background-color: var(--sh-nav);
+    color: #fff;
+}
+
+.is-off .sh-toggle-btn {
+    background-color: var(--sh-on);
+    color: #fff;
+}
+
+.sh-toggle-btn:hover {
+    opacity: 0.88;
+    color: #fff;
+}
+
+/* ---------- Списъци и таблици ---------- */
+.sh-table {
+    margin: 0;
+}
+
+    .sh-table th {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--sh-muted);
+        font-weight: 700;
+        border-bottom-width: 1px;
+    }
+
+    .sh-table td,
+    .sh-table th {
+        padding: 0.95rem 1rem;
+        vertical-align: middle;
+    }
+
+.sh-room-tile {
+    display: block;
+    padding: 1.2rem 1.3rem;
+    border-radius: var(--sh-radius);
+    background-color: var(--sh-surface);
+    color: var(--sh-ink);
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 100%;
+}
+
+    .sh-room-tile:hover {
+        color: var(--sh-ink);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 28px rgba(16, 32, 26, 0.1);
+    }
+
+.sh-progress {
+    height: 6px;
+    border-radius: 999px;
+    background-color: var(--sh-off-soft);
+}
+
+    .sh-progress .progress-bar {
+        background-color: var(--sh-on);
+    }
+
+/* ---------- Форми ---------- */
+.form-control,
+.form-select {
+    border-radius: 12px;
+    padding: 0.65rem 0.9rem;
+    border-color: #dfe5e1;
+}
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: var(--sh-on);
+        box-shadow: 0 0 0 0.2rem rgba(24, 160, 88, 0.15);
+    }
+
+.form-label {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.input-validation-error {
+    border-color: #dc3545;
+}
+
+.field-validation-error {
+    color: #dc3545;
+    font-size: 0.85rem;
+    display: block;
+    margin-top: 0.3rem;
+}
+
+.btn {
+    border-radius: 999px;
+    font-weight: 600;
+    padding-left: 1.1rem;
+    padding-right: 1.1rem;
+}
+
+.btn-primary {
+    background-color: var(--sh-on);
+    border-color: var(--sh-on);
+}
+
+    .btn-primary:hover,
+    .btn-primary:focus {
+        background-color: #12804a;
+        border-color: #12804a;
+    }
+
+.sh-alert {
+    border: none;
+    border-radius: 14px;
+}
+
+.sh-empty {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--sh-muted);
+}
+
+    .sh-empty i {
+        font-size: 2.5rem;
+    }
+
+.sh-footer {
+    padding: 1.5rem 0;
+    font-size: 0.85rem;
+    border-top: 1px solid #e2e7e3;
+    background-color: var(--sh-surface);
+}
+
+/* ---------- Плавно появяване ---------- */
+.sh-fade-in {
+    animation: shFadeIn 0.45s ease both;
+}
+
+@keyframes shFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
