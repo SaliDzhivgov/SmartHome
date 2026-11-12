@@ -1,19 +1,24 @@
-using Microsoft.AspNetCore.Mvc;
-using SmartHome.Web.Models;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
+using SmartHome.Web.Services.Interfaces;
+using SmartHome.Web.ViewModels.Shared;
 
 namespace SmartHome.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly IDashboardService dashboardService;
+
+        public HomeController(IDashboardService dashboardService)
         {
-            return View();
+            this.dashboardService = dashboardService;
         }
 
-        public IActionResult Privacy()
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var model = await dashboardService.GetDashboardAsync();
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
