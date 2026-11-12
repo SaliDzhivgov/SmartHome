@@ -1,47 +1,80 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="bg">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - SmartHome.Web</title>
-    <script type="importmap"></script>
+    <title>@ViewData["Title"] – УмноЖилище</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/SmartHome.Web.styles.css" asp-append-version="true" />
 </head>
 <body>
+    @{
+        string? currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+        string ActiveClass(string controller) => currentController == controller ? "active" : string.Empty;
+    }
+
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SmartHome.Web</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+        <nav class="navbar navbar-expand-lg navbar-dark sh-navbar">
+            <div class="container">
+                <a class="navbar-brand sh-brand" asp-controller="Home" asp-action="Index">
+                    <span class="sh-brand-icon"><i class="bi bi-house-gear"></i></span>
+                    УмноЖилище
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+                        aria-controls="mainNav" aria-expanded="false" aria-label="Меню">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="collapse navbar-collapse" id="mainNav">
+                    <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link @ActiveClass("Home")" asp-controller="Home" asp-action="Index">
+                                <i class="bi bi-speedometer2"></i> Табло
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link @ActiveClass("Devices")" asp-controller="Devices" asp-action="Index">
+                                <i class="bi bi-cpu"></i> Устройства
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @ActiveClass("Rooms")" asp-controller="Rooms" asp-action="Index">
+                                <i class="bi bi-door-open"></i> Стаи
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @ActiveClass("Categories")" asp-controller="Categories" asp-action="Index">
+                                <i class="bi bi-tags"></i> Категории
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @ActiveClass("Manufacturers")" asp-controller="Manufacturers" asp-action="Index">
+                                <i class="bi bi-building"></i> Производители
+                            </a>
                         </li>
                     </ul>
+                    <a class="btn sh-btn-accent" asp-controller="Devices" asp-action="Create">
+                        <i class="bi bi-plus-lg"></i> Добави устройство
+                    </a>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - SmartHome.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <main class="container py-4 py-lg-5">
+        <partial name="_StatusMessages" />
+        @RenderBody()
+    </main>
+
+    <footer class="sh-footer">
+        <div class="container d-flex flex-column flex-md-row justify-content-between gap-2">
+            <span>&copy; @DateTime.Now.Year УмноЖилище – управление на умен дом</span>
+            <span class="text-muted">Курсов проект ASP.NET Fundamentals</span>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
