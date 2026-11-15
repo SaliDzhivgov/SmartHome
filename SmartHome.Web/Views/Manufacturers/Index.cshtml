@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ManufacturerListItemViewModel>
+@{
+    ViewData["Title"] = "Производители";
+}
+
+<div class="sh-page-header sh-fade-in">
+    <div>
+        <div class="sh-eyebrow">Управление</div>
+        <h1 class="display-6">Производители</h1>
+    </div>
+    <a asp-action="Create" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Нов производител</a>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="sh-panel sh-empty">
+        <i class="bi bi-building"></i>
+        <p class="mt-2">Все още няма производители.</p>
+        <a asp-action="Create" class="btn btn-primary">Добави първия</a>
+    </div>
+}
+else
+{
+    <div class="sh-panel p-0 overflow-hidden">
+        <div class="table-responsive">
+            <table class="table sh-table align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>Име</th>
+                        <th>Държава</th>
+                        <th>Уебсайт</th>
+                        <th>Устройства</th>
+                        <th class="text-end">Действия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var manufacturer in Model)
+                    {
+                        <tr>
+                            <td class="fw-semibold">@manufacturer.Name</td>
+                            <td>@manufacturer.Country</td>
+                            <td>
+                                @if (string.IsNullOrEmpty(manufacturer.Website))
+                                {
+                                    <span class="text-muted">—</span>
+                                }
+                                else
+                                {
+                                    <a href="@manufacturer.Website" target="_blank" rel="noopener">
+                                        @manufacturer.Website <i class="bi bi-box-arrow-up-right"></i>
+                                    </a>
+                                }
+                            </td>
+                            <td>@manufacturer.DeviceCount</td>
+                            <td class="text-end text-nowrap">
+                                <a asp-action="Edit" asp-route-id="@manufacturer.Id" class="btn btn-sm btn-outline-dark" title="Редактирай"><i class="bi bi-pencil"></i></a>
+                                <a asp-action="Delete" asp-route-id="@manufacturer.Id" class="btn btn-sm btn-outline-danger" title="Изтрий"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
