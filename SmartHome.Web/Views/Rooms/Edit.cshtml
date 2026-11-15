@@ -1,0 +1,27 @@
+﻿@model RoomFormModel
+@{
+    ViewData["Title"] = "Редактиране на стая";
+    var id = ViewContext.RouteData.Values["id"];
+}
+
+<div class="sh-page-header sh-fade-in">
+    <div>
+        <div class="sh-eyebrow">Стаи</div>
+        <h1 class="display-6">Редактиране: @Model.Name</h1>
+    </div>
+</div>
+
+<div class="sh-panel">
+    <form asp-action="Edit" asp-route-id="@id" method="post" novalidate>
+        <partial name="_RoomFormFields" model="Model" />
+
+        <div class="d-flex gap-2 mt-4">
+            <button type="submit" class="btn btn-primary"><i class="bi bi-check-lg"></i> Запази промените</button>
+            <a asp-action="Details" asp-route-id="@id" class="btn btn-outline-secondary">Отказ</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

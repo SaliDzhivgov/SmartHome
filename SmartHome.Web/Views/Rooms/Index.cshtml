@@ -1,0 +1,63 @@
+﻿@model IEnumerable<RoomListItemViewModel>
+@{
+    ViewData["Title"] = "Стаи";
+}
+
+<div class="sh-page-header sh-fade-in">
+    <div>
+        <div class="sh-eyebrow">Управление</div>
+        <h1 class="display-6">Стаи</h1>
+    </div>
+    <a asp-action="Create" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Нова стая</a>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="sh-panel sh-empty">
+        <i class="bi bi-door-closed"></i>
+        <p class="mt-2">Все още няма добавени стаи.</p>
+        <a asp-action="Create" class="btn btn-primary">Добави първата</a>
+    </div>
+}
+else
+{
+    <div class="sh-panel p-0 overflow-hidden">
+        <div class="table-responsive">
+            <table class="table sh-table align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>Стая</th>
+                        <th>Етаж</th>
+                        <th>Устройства</th>
+                        <th>Включени</th>
+                        <th>Мощност</th>
+                        <th class="text-end">Действия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var room in Model)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-action="Details" asp-route-id="@room.Id" class="fw-semibold text-reset">@room.Name</a>
+                                @if (!string.IsNullOrWhiteSpace(room.Description))
+                                {
+                                    <div class="small text-muted">@room.Description</div>
+                                }
+                            </td>
+                            <td>@room.Floor</td>
+                            <td>@room.DeviceCount</td>
+                            <td>@room.ActiveDeviceCount</td>
+                            <td>@room.ActivePowerWatts.ToString("0.#") W</td>
+                            <td class="text-end text-nowrap">
+                                <a asp-action="Details" asp-route-id="@room.Id" class="btn btn-sm btn-outline-dark" title="Детайли"><i class="bi bi-eye"></i></a>
+                                <a asp-action="Edit" asp-route-id="@room.Id" class="btn btn-sm btn-outline-dark" title="Редактирай"><i class="bi bi-pencil"></i></a>
+                                <a asp-action="Delete" asp-route-id="@room.Id" class="btn btn-sm btn-outline-danger" title="Изтрий"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}

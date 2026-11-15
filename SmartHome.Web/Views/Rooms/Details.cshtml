@@ -1,0 +1,51 @@
+﻿@model RoomDetailsViewModel
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="sh-page-header sh-fade-in">
+    <div>
+        <div class="sh-eyebrow">
+            <a asp-action="Index" class="text-reset text-decoration-none">Стаи</a> / етаж @Model.Floor
+        </div>
+        <h1 class="display-6">@Model.Name</h1>
+    </div>
+    <div class="d-flex gap-2">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-dark"><i class="bi bi-pencil"></i> Редактирай</a>
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger"><i class="bi bi-trash"></i> Изтрий</a>
+    </div>
+</div>
+
+<div class="sh-panel mb-4">
+    <p class="mb-2">@(string.IsNullOrWhiteSpace(Model.Description) ? "Няма описание." : Model.Description)</p>
+    <div class="small text-muted">
+        Устройства: <strong>@Model.Devices.Count()</strong> ·
+        Текуща мощност: <strong>@Model.ActivePowerWatts.ToString("0.#") W</strong>
+    </div>
+</div>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="h5 fw-bold m-0">Устройства в стаята</h2>
+    <a asp-controller="Devices" asp-action="Create" asp-route-roomId="@Model.Id" class="btn btn-sm btn-primary">
+        <i class="bi bi-plus-lg"></i> Добави устройство тук
+    </a>
+</div>
+
+@if (!Model.Devices.Any())
+{
+    <div class="sh-panel sh-empty">
+        <i class="bi bi-cpu"></i>
+        <p class="mt-2 mb-0">В тази стая още няма устройства.</p>
+    </div>
+}
+else
+{
+    <div class="row g-3">
+        @foreach (var device in Model.Devices)
+        {
+            <div class="col-sm-6 col-lg-4 col-xl-3">
+                <partial name="_DeviceCard" model="device" />
+            </div>
+        }
+    </div>
+}
