@@ -36,7 +36,7 @@
 
 \## Архитектура
 
-```
+
 
 SmartHome.Web
 
@@ -54,7 +54,7 @@ SmartHome.Web
 
 └── Views            – Razor изгледи и partial views
 
-```
+
 
 
 
@@ -66,47 +66,49 @@ SmartHome.Web
 
 1\. Клонирай хранилището:
 
-&#x20;  ```
+&#x20;  
 
 &#x20;  git clone https://github.com/SaliDzhivgov/SmartHome.git
 
 &#x20;  cd SmartHome
 
-&#x20;  ```
+&#x20;  
 
 2\. Connection string се намира в `SmartHome.Web/appsettings.json`:
 
-&#x20;  ```
+&#x20;  
 
 &#x20;  Server=(localdb)\\mssqllocaldb;Database=SmartHomeDb;Trusted\_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True
 
-&#x20;  ```
+&#x20;  
 
 &#x20;  Ако използваш пълен SQL Server, смени `Server=` с името на своя сървър.
 
-3\. Създай базата:
+3\. Свали пакетите и създай базата:
 
-&#x20;  ```
+&#x20;  
+
+&#x20;  dotnet restore
 
 &#x20;  dotnet tool install --global dotnet-ef
 
 &#x20;  dotnet ef database update --project SmartHome.Web
 
-&#x20;  ```
+&#x20;  
 
 &#x20;  (Приложението прилага миграциите и автоматично при стартиране.)
 
 4\. Стартирай:
 
-&#x20;  ```
+&#x20;  
 
 &#x20;  dotnet run --project SmartHome.Web
 
-&#x20;  ```
+&#x20;  
 
-&#x20;  и отвори `https://localhost:7282`, или натисни F5 във Visual Studio.
+&#x20;  и отвори адреса от реда `Now listening on:` (например `http://localhost:5176`), или натисни F5 във Visual Studio.
 
 
 
-Не са нужни други променливи на средата и потребителски акаунти. Базата се зарежда с примерни данни: 6 стаи, 6 категории, 6 производители и 12 устройства.
+Не са нужни други променливи на средата и потребителски акаунти. Базата се зарежда с примерни данни: 6 стаи, 6 категории, 6 производители и 12 устройства.Не са нужни други променливи на средата и потребителски акаунти. Базата се зарежда с примерни данни: 6 стаи, 6 категории, 6 производители и 12 устройства.
 
