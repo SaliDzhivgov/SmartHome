@@ -1,0 +1,36 @@
+﻿@model DeleteViewModel
+@{
+    string entityLabel = ViewData["EntityLabel"] as string ?? "записа";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="sh-panel text-center sh-fade-in">
+            <i class="bi bi-trash3 display-5 text-danger"></i>
+            <h1 class="h4 fw-bold mt-3">@ViewData["Title"]</h1>
+
+            @if (Model.CanDelete)
+            {
+                <p class="text-muted">
+                    Сигурни ли сте, че искате да изтриете @entityLabel <strong>„@Model.Name“</strong>?
+                    Това действие не може да бъде отменено.
+                </p>
+            }
+            else
+            {
+                <div class="alert alert-warning text-start">
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                    Към <strong>„@Model.Name“</strong> има свързани устройства (@Model.DeviceCount).
+                    Първо ги преместете или изтрийте.
+                </div>
+            }
+
+            <form asp-action="Delete" asp-route-id="@Model.Id" method="post" class="d-flex justify-content-center gap-2 mt-4">
+                <button type="submit" class="btn btn-danger" disabled="@(!Model.CanDelete)">
+                    <i class="bi bi-trash"></i> Да, изтрий
+                </button>
+                <a asp-action="Index" class="btn btn-outline-secondary">Отказ</a>
+            </form>
+        </div>
+    </div>
+</div>
