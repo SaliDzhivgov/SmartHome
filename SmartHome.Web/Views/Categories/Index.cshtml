@@ -1,0 +1,47 @@
+﻿@model IEnumerable<CategoryListItemViewModel>
+@{
+    ViewData["Title"] = "Категории";
+}
+
+<div class="sh-page-header sh-fade-in">
+    <div>
+        <div class="sh-eyebrow">Управление</div>
+        <h1 class="display-6">Категории</h1>
+    </div>
+    <a asp-action="Create" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Нова категория</a>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="sh-panel sh-empty">
+        <i class="bi bi-tags"></i>
+        <p class="mt-2">Все още няма категории.</p>
+        <a asp-action="Create" class="btn btn-primary">Добави първата</a>
+    </div>
+}
+else
+{
+    <div class="row g-3">
+        @foreach (var category in Model)
+        {
+            <div class="col-sm-6 col-lg-4">
+                <div class="sh-panel h-100 d-flex flex-column">
+                    <div class="d-flex align-items-center gap-3 mb-2">
+                        <span class="sh-device-icon"><i class="bi @category.Icon"></i></span>
+                        <div>
+                            <h2 class="h6 fw-bold mb-0">@category.Name</h2>
+                            <a asp-controller="Devices" asp-action="Index" asp-route-CategoryId="@category.Id" class="small">
+                                @category.DeviceCount устройства
+                            </a>
+                        </div>
+                    </div>
+                    <p class="small text-muted flex-grow-1">@(category.Description ?? "Няма описание.")</p>
+                    <div class="d-flex gap-2">
+                        <a asp-action="Edit" asp-route-id="@category.Id" class="btn btn-sm btn-outline-dark"><i class="bi bi-pencil"></i> Редактирай</a>
+                        <a asp-action="Delete" asp-route-id="@category.Id" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i> Изтрий</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
