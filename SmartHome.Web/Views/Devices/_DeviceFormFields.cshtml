@@ -1,0 +1,62 @@
+﻿
+@model DeviceFormModel
+
+<div asp-validation-summary="ModelOnly" class="alert alert-danger sh-alert"></div>
+
+<div class="row g-3">
+    <div class="col-md-6">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" placeholder="напр. Лампа в хола" />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="SerialNumber" class="form-label"></label>
+        <input asp-for="SerialNumber" class="form-control" placeholder="напр. PH-HUE-1003" />
+        <span asp-validation-for="SerialNumber"></span>
+    </div>
+
+    <div class="col-md-4">
+        <label asp-for="RoomId" class="form-label"></label>
+        <select asp-for="RoomId" asp-items="@(new SelectList(Model.Rooms, "Id", "Name"))" class="form-select">
+            <option value="">-- Изберете стая --</option>
+        </select>
+        <span asp-validation-for="RoomId"></span>
+    </div>
+    <div class="col-md-4">
+        <label asp-for="CategoryId" class="form-label"></label>
+        <select asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))" class="form-select">
+            <option value="">-- Изберете категория --</option>
+        </select>
+        <span asp-validation-for="CategoryId"></span>
+    </div>
+    <div class="col-md-4">
+        <label asp-for="ManufacturerId" class="form-label"></label>
+        <select asp-for="ManufacturerId" asp-items="@(new SelectList(Model.Manufacturers, "Id", "Name"))" class="form-select">
+            <option value="">-- Изберете производител --</option>
+        </select>
+        <span asp-validation-for="ManufacturerId"></span>
+    </div>
+
+    <div class="col-md-4">
+        <label asp-for="PowerWatts" class="form-label"></label>
+        <input asp-for="PowerWatts" class="form-control" step="0.1" />
+        <span asp-validation-for="PowerWatts"></span>
+    </div>
+    <div class="col-md-4">
+        <label asp-for="InstalledOn" class="form-label"></label>
+        <input asp-for="InstalledOn" class="form-control" />
+        <span asp-validation-for="InstalledOn"></span>
+    </div>
+    <div class="col-md-4 d-flex align-items-end">
+        <div class="form-check form-switch mb-2">
+            <input asp-for="IsOn" class="form-check-input" role="switch" />
+            <label asp-for="IsOn" class="form-check-label"></label>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <label asp-for="Notes" class="form-label"></label>
+        <textarea asp-for="Notes" class="form-control" rows="3" placeholder="По желание"></textarea>
+        <span asp-validation-for="Notes"></span>
+    </div>
+</div>

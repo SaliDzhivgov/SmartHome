@@ -1,0 +1,27 @@
+﻿
+@model DeviceFormModel
+@{
+    ViewData["Title"] = "Ново устройство";
+}
+
+<div class="sh-page-header sh-fade-in">
+    <div>
+        <div class="sh-eyebrow">Устройства</div>
+        <h1 class="display-6">Ново устройство</h1>
+    </div>
+</div>
+
+<div class="sh-panel">
+    <form asp-action="Create" method="post" novalidate>
+        <partial name="_DeviceFormFields" model="Model" />
+
+        <div class="d-flex gap-2 mt-4">
+            <button type="submit" class="btn btn-primary"><i class="bi bi-check-lg"></i> Запази</button>
+            <a asp-action="Index" class="btn btn-outline-secondary">Отказ</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

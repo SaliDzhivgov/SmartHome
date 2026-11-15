@@ -1,0 +1,36 @@
+﻿
+@model DeviceFilterViewModel
+@{
+    ViewData["Title"] = "Устройства";
+}
+
+<div class="sh-page-header sh-fade-in">
+    <div>
+        <div class="sh-eyebrow">Управление</div>
+        <h1 class="display-6">Устройства</h1>
+    </div>
+    <a asp-action="Create" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Добави устройство</a>
+</div>
+
+<partial name="_DeviceFilters" model="Model" />
+
+<p class="text-muted small mb-3">Намерени устройства: <strong>@Model.Devices.Count()</strong></p>
+
+@if (!Model.Devices.Any())
+{
+    <div class="sh-panel sh-empty">
+        <i class="bi bi-search"></i>
+        <p class="mt-2 mb-0">Няма устройства, които отговарят на търсенето.</p>
+    </div>
+}
+else
+{
+    <div class="row g-3">
+        @foreach (var device in Model.Devices)
+        {
+            <div class="col-sm-6 col-lg-4 col-xl-3">
+                <partial name="_DeviceCard" model="device" />
+            </div>
+        }
+    </div>
+}

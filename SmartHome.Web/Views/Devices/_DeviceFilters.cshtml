@@ -1,0 +1,38 @@
+﻿
+@model DeviceFilterViewModel
+
+<form asp-action="Index" method="get" class="sh-panel mb-4">
+    <div class="row g-3 align-items-end">
+        <div class="col-md-4">
+            <label asp-for="SearchTerm" class="form-label"></label>
+            <input asp-for="SearchTerm" class="form-control" placeholder="Име или сериен номер" />
+        </div>
+        <div class="col-6 col-md-2">
+            <label asp-for="RoomId" class="form-label"></label>
+            <select asp-for="RoomId" asp-items="@(new SelectList(Model.Rooms, "Id", "Name"))" class="form-select">
+                <option value="">Всички</option>
+            </select>
+        </div>
+        <div class="col-6 col-md-2">
+            <label asp-for="CategoryId" class="form-label"></label>
+            <select asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))" class="form-select">
+                <option value="">Всички</option>
+            </select>
+        </div>
+        <div class="col-6 col-md-2">
+            <label asp-for="Status" class="form-label"></label>
+            <select asp-for="Status" class="form-select">
+                <option value="@DeviceStatusFilter.All">Всички</option>
+                <option value="@DeviceStatusFilter.On">Включени</option>
+                <option value="@DeviceStatusFilter.Off">Изключени</option>
+            </select>
+        </div>
+        <div class="col-6 col-md-2 d-flex gap-2">
+            <button type="submit" class="btn btn-primary flex-fill"><i class="bi bi-funnel"></i> Филтрирай</button>
+        </div>
+    </div>
+    @if (Model.HasActiveFilters)
+    {
+        <a asp-action="Index" class="small d-inline-block mt-3"><i class="bi bi-x-circle"></i> Изчисти филтрите</a>
+    }
+</form>
